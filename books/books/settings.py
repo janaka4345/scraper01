@@ -64,6 +64,7 @@ ROBOTSTXT_OBEY = False
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    "books.pipelines.BooksPipeline": 300,
+   "books.pipelines.SaveToMOngoDBPipeline": 400,
 }
 
 FEEDS={

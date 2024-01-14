@@ -17,3 +17,19 @@ class BooksPipeline:
                 value=adapter.get(field_name)
                 adapter[field_name]=value.strip()
         return item
+
+from pymongo import MongoClient
+
+class SaveToMOngoDBPipeline:
+    def process_item(self,item,spider):
+        client = MongoClient('mongodb+srv://<usernam>:<pasward>@mer-learn2.ehyuufp.mongodb.net/')
+        db = client['books_to_scrape']
+        collection = db['allBooks2']
+        collection.insert_one(dict(item))
+        return item 
+    
+    def close_spider(self,spider):
+        MongoClient.close()
+
+        
+
