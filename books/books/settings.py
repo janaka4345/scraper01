@@ -66,6 +66,10 @@ ITEM_PIPELINES = {
    "books.pipelines.BooksPipeline": 300,
 }
 
+FEEDS={
+    'bookdata.json':{'format':'json'}
+}
+
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
@@ -91,3 +95,8 @@ ITEM_PIPELINES = {
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
+
+#mongodb connection
+# MONGODB_URI = 'mongodb+srv://scrap_j12:matapissu@mer-learn2.ehyuufp.mongodb.net/'
+# MONGODB_DB_NAME = 'books_to_scrape'
+# MONGODB_COLLECTION_NAME = 'allBooks'

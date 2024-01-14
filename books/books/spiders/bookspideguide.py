@@ -1,5 +1,6 @@
 import scrapy
 from books.items import BooksItem
+from pymongo import MongoClient
 
 class BookspiderSpider(scrapy.Spider):
     name = 'bookspider2'
@@ -43,3 +44,12 @@ class BookspiderSpider(scrapy.Spider):
         book_item['description']=response.xpath("//div[@id='product_description']/following-sibling::p/text()").get()
         book_item['price']=response.css('p.price_color ::text').get()
         yield book_item
+
+        self.save_to_mongodb(book_item)
+
+    def save_to_mongodb(self, item):
+        client = MongoClient('mongodb+srv://<un>:<pw>@mer-learn2.ehyuufp.mongodb.net/')
+        db = client['books_to_scrape']
+        collection = db['allBooks']
+        collection.insert_one(dict(item))
+        client.close()
